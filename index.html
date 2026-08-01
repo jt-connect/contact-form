@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JT-Connect Inquiry</title>
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#1f2937,#2563eb);
+    margin:0;
+    padding:20px;
+}
+
+.container {
+    max-width:450px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.logo {
+    text-align:center;
+    font-size:32px;
+    font-weight:bold;
+    color:#2563eb;
+}
+
+.subtitle {
+    text-align:center;
+    color:#555;
+    margin-bottom:25px;
+}
+
+label {
+    font-weight:bold;
+    display:block;
+    margin-top:15px;
+}
+
+input, textarea {
+
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    box-sizing:border-box;
+    font-size:15px;
+
+}
+
+
+textarea {
+    height:120px;
+    resize:none;
+}
+
+
+button {
+
+    width:100%;
+    padding:14px;
+    margin-top:25px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+
+}
+
+
+button:hover {
+    background:#1d4ed8;
+}
+
+
+#otpSection {
+    display:none;
+}
+
+
+.message {
+
+    text-align:center;
+    margin-top:15px;
+    font-weight:bold;
+
+}
+
+
+.footer {
+
+    text-align:right;
+    font-size:12px;
+    color:#777;
+    margin-top:25px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="logo">
+JT-Connect
+</div>
+
+
+<div class="subtitle">
+AppSheet & Business Automation Solutions
+</div>
+
+
+
+<div id="formSection">
+
+
+<label>Name</label>
+<input id="name" type="text" required>
+
+
+
+<label>Email Address</label>
+<input id="email" type="email" required>
+
+
+
+<label>How can we help?</label>
+<textarea id="details" placeholder="Describe your requirement..." required></textarea>
+
+
+<button onclick="sendOTP()">
+Send Verification Code
+</button>
+
+
+</div>
+
+
+
+
+<div id="otpSection">
+
+
+<label>Enter 4 Digit Verification Code</label>
+
+<input id="otp" type="number" maxlength="4">
+
+
+<button onclick="verifyOTP()">
+Verify & Submit
+</button>
+
+
+</div>
+
+
+
+
+<div class="message" id="message"></div>
+
+
+
+<div class="footer">
+Developed by JT-Connect
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyBQOTQ-pi9ejWiaEZnrKwfVOm8zW6R9hyn5cydNdxJWVQTV-Ck8movTjeSXy-6osjbnQ/exec";
+
+
+
+let customerEmail="";
+
+
+
+function sendOTP(){
+
+
+let name =
+document.getElementById("name").value;
+
+
+let email =
+document.getElementById("email").value;
+
+
+let details =
+document.getElementById("details").value;
+
+
+
+if(!name || !email || !details){
+
+alert("Please complete all fields");
+return;
+
+}
+
+
+customerEmail=email;
+
+
+document.getElementById("message").innerHTML=
+"Sending verification code...";
+
+
+
+fetch(SCRIPT_URL,{
+method:"POST",
+body:JSON.stringify({
+
+action:"sendOTP",
+name:name,
+email:email,
+details:details
+
+})
+
+})
+.then(res=>res.text())
+.then(data=>{
+
+
+document.getElementById("formSection").style.display="none";
+
+document.getElementById("otpSection").style.display="block";
+
+
+document.getElementById("message").innerHTML=
+"OTP sent to your email";
+
+
+});
+
+
+}
+
+
+
+
+
+function verifyOTP(){
+
+
+let otp =
+document.getElementById("otp").value;
+
+
+
+fetch(SCRIPT_URL,{
+method:"POST",
+body:JSON.stringify({
+
+action:"verifyOTP",
+email:customerEmail,
+otp:otp
+
+})
+
+})
+.then(res=>res.text())
+.then(data=>{
+
+
+if(data=="Success"){
+
+document.getElementById("message").innerHTML=
+"Thank you. Your inquiry has been received.";
+
+document.getElementById("otpSection").style.display="none";
+
+}
+
+else{
+
+document.getElementById("message").innerHTML=
+data;
+
+}
+
+
+});
+
+
+}
+
+
+
+</script>
+
+
+</body>
+</html>
