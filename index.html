@@ -3,264 +3,211 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JT-Connect — AppSheet & Business Automation Solutions</title>
+<title>Joe Tayactac — AppSheet Builds</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0F1B2D;
-    --ink-2:#16233A;
-    --paper:#F7F5F0;
-    --paper-2:#EFECE4;
-    --text:#1A2436;
-    --text-soft:#5B6577;
-    --accent:#2DD4A7;
-    --accent-dim:#1C8F6E;
-    --amber:#F2A93B;
-    --line: rgba(247,245,240,0.14);
-    --danger:#E4644B;
+    --paper:#FAF7F1;
+    --paper-2:#F1EBDC;
+    --ink:#211C15;
+    --ink-soft:#736B5C;
+    --line:#E7DFCE;
+    --accent:#FF5B33;
+    --accent-ink:#B23D1F;
+    --accent-soft:rgba(255,91,51,0.12);
+    --danger:#C4432E;
+    --white:#FFFFFF;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     font-family:'Inter',sans-serif;
-    background:var(--ink);
-    color:var(--text);
+    background:var(--paper);
+    color:var(--ink);
     min-height:100vh;
   }
-  .shell{
-    display:grid;
-    grid-template-columns: 1.05fr 1fr;
-    min-height:100vh;
-  }
-  /* ---------- LEFT: BRAND / SIGNATURE DIAGRAM ---------- */
-  .brand{
-    position:relative;
-    background:
-      radial-gradient(circle at 15% 10%, rgba(45,212,167,0.10), transparent 45%),
-      linear-gradient(180deg,var(--ink) 0%, var(--ink-2) 100%);
-    color:var(--paper);
-    padding:56px 56px 40px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    overflow:hidden;
-  }
-  .brand::before{
-    content:"";
-    position:absolute; inset:0;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:42px 42px;
-    mask-image: radial-gradient(circle at 20% 20%, black 0%, transparent 70%);
-    opacity:0.6;
-    pointer-events:none;
-  }
-  .brand-top{position:relative; z-index:1;}
-  .wordmark{
-    font-family:'Space Grotesk',sans-serif;
-    font-weight:700;
-    font-size:22px;
-    letter-spacing:0.02em;
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .wordmark .dot{
-    width:9px;height:9px;border-radius:50%;
-    background:var(--accent);
-    box-shadow:0 0 0 4px rgba(45,212,167,0.18);
-  }
-  .eyebrow{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--accent);
-    margin-top:26px;
-  }
-  h1.headline{
-    font-family:'Space Grotesk',sans-serif;
-    font-weight:600;
-    font-size:clamp(28px, 3.2vw, 40px);
-    line-height:1.15;
-    margin:14px 0 0;
-    max-width:11ch;
-    color:var(--paper);
-  }
-  .headline em{
-    font-style:normal;
-    color:var(--accent);
-  }
-  .sub{
-    margin-top:16px;
-    font-size:15px;
-    line-height:1.6;
-    color:rgba(247,245,240,0.68);
-    max-width:38ch;
+  .page{
+    max-width:480px;
+    margin:0 auto;
+    padding:64px 22px 48px;
   }
 
-  /* Signature: flow diagram mirroring the actual form steps */
-  .flow{
-    position:relative; z-index:1;
-    margin-top:44px;
-    display:flex;
-    flex-direction:column;
-    gap:0;
+  /* ---------- PERSONAL HEADER ---------- */
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:6px 14px 6px 8px;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--ink-soft);
   }
-  .flow-step{
-    display:flex;
-    align-items:flex-start;
-    gap:16px;
-    padding:14px 0;
-  }
-  .flow-marker-col{
-    display:flex; flex-direction:column; align-items:center;
-    width:28px;
-  }
-  .flow-node{
-    width:28px;height:28px;border-radius:50%;
-    border:1.5px solid rgba(247,245,240,0.3);
-    display:flex; align-items:center; justify-content:center;
+  .badge .avatar{
+    width:22px;height:22px;border-radius:50%;
+    background:var(--ink);
+    color:var(--paper);
+    display:flex;align-items:center;justify-content:center;
     font-family:'IBM Plex Mono',monospace;
-    font-size:11px;
-    color:rgba(247,245,240,0.55);
-    background:var(--ink-2);
-    transition:all .35s ease;
+    font-size:10px;font-weight:600;
     flex-shrink:0;
   }
-  .flow-node.active{
-    border-color:var(--accent);
-    color:var(--ink);
-    background:var(--accent);
-    box-shadow:0 0 0 5px rgba(45,212,167,0.16);
+  .badge .yt{ color:var(--accent-ink); }
+
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(30px,7vw,42px);
+    line-height:1.12;
+    letter-spacing:-0.01em;
+    margin:20px 0 0;
   }
-  .flow-node.done{
-    border-color:var(--accent);
-    background:transparent;
-    color:var(--accent);
-  }
-  .flow-thread{
-    width:1.5px; flex:1; min-height:26px;
-    background:rgba(247,245,240,0.16);
-    margin-top:2px;
-  }
-  .flow-thread.active{ background:var(--accent); }
-  .flow-body{padding-top:2px;}
-  .flow-title{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:14.5px; font-weight:600;
-    color:var(--paper);
-  }
-  .flow-desc{
-    font-size:12.5px; color:rgba(247,245,240,0.5);
-    margin-top:2px;
+  h1 .accent{ color:var(--accent); font-style:italic; }
+
+  .sub{
+    font-size:15.5px;
+    line-height:1.6;
+    color:var(--ink-soft);
+    margin:14px 0 0;
+    max-width:44ch;
   }
 
-  .brand-bottom{
-    position:relative; z-index:1;
-    display:flex; justify-content:space-between; align-items:flex-end;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11px;
-    color:rgba(247,245,240,0.4);
-    border-top:1px solid var(--line);
-    padding-top:16px;
-    margin-top:32px;
-  }
-
-  /* ---------- RIGHT: FORM ---------- */
-  .panel{
-    background:var(--paper);
+  /* ---------- SIGNATURE: SHEET -> APP ANIMATION ---------- */
+  .signature{
     display:flex;
     align-items:center;
-    justify-content:center;
-    padding:40px;
+    gap:14px;
+    margin:30px 0 4px;
   }
-  .card{
-    width:100%;
-    max-width:420px;
+  .sig-grid{
+    display:grid;
+    grid-template-columns:repeat(3,16px);
+    grid-template-rows:repeat(2,16px);
+    gap:4px;
   }
-  .card-eyebrow{
+  .sig-cell{
+    width:16px;height:16px;
+    background:var(--white);
+    border:1.5px solid var(--line);
+    border-radius:2px;
+    animation:morph 3.6s ease-in-out infinite;
+  }
+  .sig-cell:nth-child(1){animation-delay:0.0s;}
+  .sig-cell:nth-child(2){animation-delay:0.12s;}
+  .sig-cell:nth-child(3){animation-delay:0.24s;}
+  .sig-cell:nth-child(4){animation-delay:0.36s;}
+  .sig-cell:nth-child(5){animation-delay:0.48s;}
+  .sig-cell:nth-child(6){animation-delay:0.6s;}
+  @keyframes morph{
+    0%, 8%{ border-radius:2px; background:var(--white); border-color:var(--line); transform:scale(1); }
+    35%, 55%{ border-radius:6px; background:var(--accent); border-color:var(--accent); transform:scale(1.08); }
+    80%, 100%{ border-radius:2px; background:var(--white); border-color:var(--line); transform:scale(1); }
+  }
+  .sig-arrow{
+    color:var(--ink-soft);
+    font-size:16px;
+  }
+  .sig-label{
     font-family:'IBM Plex Mono',monospace;
-    font-size:11px;
-    letter-spacing:0.12em;
+    font-size:10.5px;
+    letter-spacing:0.06em;
     text-transform:uppercase;
-    color:var(--accent-dim);
+    color:var(--ink-soft);
   }
-  .card h2{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:24px;
-    margin:8px 0 6px;
-    color:var(--text);
+  @media (prefers-reduced-motion: reduce){
+    .sig-cell{ animation:none; background:var(--accent); border-color:var(--accent); border-radius:6px; }
   }
-  .card .lede{
-    font-size:14px;
-    color:var(--text-soft);
-    margin-bottom:28px;
-    line-height:1.55;
+
+  /* ---------- STEP DOTS ---------- */
+  .steps{
+    display:flex; align-items:center; gap:6px;
+    margin:36px 0 18px;
   }
+  .step-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--line);
+    transition:background .25s ease, transform .25s ease;
+  }
+  .step-dot.active{ background:var(--accent); transform:scale(1.3); }
+  .step-dot.done{ background:var(--accent-ink); }
+  .step-label{
+    font-size:11.5px;
+    color:var(--ink-soft);
+    margin-left:4px;
+    font-weight:600;
+  }
+
+  /* ---------- CARD ---------- */
+  .card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:26px 24px 24px;
+    box-shadow:0 1px 2px rgba(33,28,21,0.04);
+  }
+
   label{
-    font-family:'Inter',sans-serif;
     font-weight:600;
     font-size:13px;
-    color:var(--text);
+    color:var(--ink);
     display:block;
-    margin-top:18px;
+    margin-top:16px;
     margin-bottom:6px;
   }
+  label:first-child{ margin-top:0; }
   input, textarea{
     width:100%;
     padding:12px 14px;
-    border:1.5px solid #DEDAD0;
-    border-radius:9px;
+    border:1.5px solid var(--line);
+    border-radius:10px;
     box-sizing:border-box;
     font-size:14.5px;
     font-family:'Inter',sans-serif;
-    background:#fff;
-    color:var(--text);
+    background:var(--paper);
+    color:var(--ink);
     transition:border-color .15s ease, box-shadow .15s ease;
   }
   input:focus, textarea:focus{
     outline:none;
-    border-color:var(--accent-dim);
-    box-shadow:0 0 0 3px rgba(45,212,167,0.15);
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px var(--accent-soft);
+    background:var(--white);
   }
   input.error, textarea.error{ border-color:var(--danger); }
-  .field-error{
-    font-size:12px; color:var(--danger); margin-top:5px; display:none;
-  }
-  textarea{ height:104px; resize:none; }
+  .field-error{ font-size:12px; color:var(--danger); margin-top:5px; display:none; }
+  textarea{ height:96px; resize:none; }
 
   .verify-note{
     display:flex;
     align-items:flex-start;
     gap:9px;
-    margin:20px 0 0;
-    padding:12px 13px;
+    margin:18px 0 0;
+    padding:11px 12px;
     background:var(--paper-2);
-    border:1px solid #E4E0D5;
-    border-radius:9px;
+    border-radius:10px;
     font-size:12.5px;
     line-height:1.5;
-    color:var(--text-soft);
+    color:var(--ink-soft);
   }
   .verify-note-icon{
-    width:16px; height:16px;
-    color:var(--accent-dim);
+    width:15px; height:15px;
+    color:var(--accent-ink);
     flex-shrink:0;
-    margin-top:1px;
+    margin-top:2px;
   }
 
   button{
     width:100%;
     padding:13px;
-    margin-top:26px;
+    margin-top:20px;
     background:var(--ink);
     color:var(--paper);
     border:none;
-    border-radius:9px;
+    border-radius:10px;
     font-family:'Inter',sans-serif;
     font-weight:600;
     font-size:14.5px;
@@ -268,35 +215,31 @@
     transition:background .15s ease, transform .1s ease;
     display:flex; align-items:center; justify-content:center; gap:9px;
   }
-  button:hover:not(:disabled){ background:var(--ink-2); }
+  button:hover:not(:disabled){ background:var(--accent-ink); }
   button:active:not(:disabled){ transform:scale(0.99); }
-  button:disabled{
-    background:#C9C4B8;
-    cursor:not-allowed;
-  }
+  button:disabled{ background:#D8D2C4; cursor:not-allowed; }
   button.secondary{
     background:transparent;
-    color:var(--text-soft);
-    border:1.5px solid #DEDAD0;
-    margin-top:10px;
+    color:var(--ink-soft);
+    border:1.5px solid var(--line);
+    margin-top:8px;
     font-weight:500;
   }
   button.secondary:hover:not(:disabled){
-    border-color:var(--accent-dim);
-    color:var(--accent-dim);
+    border-color:var(--accent);
+    color:var(--accent-ink);
     background:transparent;
   }
 
   .spinner{
     width:15px;height:15px;
     border-radius:50%;
-    border:2px solid rgba(247,245,240,0.35);
+    border:2px solid rgba(250,247,241,0.35);
     border-top-color:var(--paper);
     animation:spin .7s linear infinite;
     display:none;
   }
   button.loading .spinner{ display:inline-block; }
-  button.loading .btn-label{ opacity:0.85; }
   @keyframes spin{ to{ transform:rotate(360deg); } }
 
   #otpSection{ display:none; }
@@ -308,203 +251,164 @@
     -moz-appearance:textfield;
   }
   .otp-input::-webkit-outer-spin-button,
-  .otp-input::-webkit-inner-spin-button{
-    -webkit-appearance:none; margin:0;
-  }
+  .otp-input::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
 
   .resend-row{
     display:flex; justify-content:space-between; align-items:center;
     margin-top:14px;
     font-size:12.5px;
-    color:var(--text-soft);
+    color:var(--ink-soft);
   }
   .resend-link{
-    color:var(--accent-dim);
+    color:var(--accent-ink);
     font-weight:600;
     cursor:pointer;
     background:none; border:none; padding:0; font-size:12.5px;
     font-family:'Inter',sans-serif;
   }
-  .resend-link:disabled{ color:#B7B2A6; cursor:not-allowed; }
+  .resend-link:disabled{ color:#C7C0B1; cursor:not-allowed; }
 
   .message{
     text-align:center;
-    margin-top:16px;
+    margin-top:14px;
     font-size:13.5px;
     font-weight:600;
     min-height:18px;
   }
-  .message.ok{ color:var(--accent-dim); }
+  .message.ok{ color:var(--accent-ink); }
   .message.err{ color:var(--danger); }
-  .message.info{ color:var(--text-soft); font-weight:500; }
+  .message.info{ color:var(--ink-soft); font-weight:500; }
 
   .success-state{
     display:none;
     text-align:center;
-    padding:20px 0;
+    padding:12px 0 6px;
   }
   .success-icon{
-    width:52px;height:52px;border-radius:50%;
-    background:rgba(45,212,167,0.14);
-    color:var(--accent-dim);
+    width:48px;height:48px;border-radius:50%;
+    background:var(--accent-soft);
+    color:var(--accent-ink);
     display:flex; align-items:center; justify-content:center;
-    margin:0 auto 16px;
-    font-size:24px;
+    margin:0 auto 14px;
+    font-size:22px;
   }
   .success-state h3{
-    font-family:'Space Grotesk',sans-serif;
+    font-family:'Fraunces',serif;
+    font-weight:600;
     margin:0 0 6px;
-    font-size:19px;
-    color:var(--text);
+    font-size:20px;
   }
-  .success-state p{
-    font-size:13.5px; color:var(--text-soft); margin:0;
-  }
+  .success-state p{ font-size:13.5px; color:var(--ink-soft); margin:0; line-height:1.5; }
 
   .footer{
     text-align:center;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11px;
-    color:#B7B2A6;
-    margin-top:30px;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:26px;
   }
+  .footer a{ color:var(--ink-soft); }
 
-  @media (max-width: 880px){
-    .shell{ grid-template-columns:1fr; }
-    .brand{ padding:36px 28px 28px; }
-    .flow{ margin-top:28px; }
-    .headline{ max-width:none; }
-    .panel{ padding:28px 20px 44px; }
-  }
   @media (prefers-reduced-motion: reduce){
     .spinner{ animation:none; }
-    .flow-node, .flow-thread{ transition:none; }
   }
 </style>
 </head>
 <body>
-<div class="shell">
+<div class="page">
 
-  <!-- BRAND / SIGNATURE PANEL -->
-  <div class="brand">
-    <div class="brand-top">
-      <div class="wordmark"><span class="dot"></span>JT&#8209;Connect</div>
-      <div class="eyebrow">AppSheet &amp; Business Automation</div>
-      <h1 class="headline">Turn spreadsheets into <em>systems</em>.</h1>
-      <p class="sub">We design AppSheet apps and automation workflows that replace manual, error-prone processes with something your team actually trusts.</p>
-
-      <div class="flow" id="flowDiagram">
-        <div class="flow-step">
-          <div class="flow-marker-col">
-            <div class="flow-node active" id="node-1">1</div>
-            <div class="flow-thread" id="thread-1"></div>
-          </div>
-          <div class="flow-body">
-            <div class="flow-title">Tell us the problem</div>
-            <div class="flow-desc">Share what's slow, manual, or breaking today.</div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-marker-col">
-            <div class="flow-node" id="node-2">2</div>
-            <div class="flow-thread" id="thread-2"></div>
-          </div>
-          <div class="flow-body">
-            <div class="flow-title">Verify your email</div>
-            <div class="flow-desc">A quick code confirms you're a real person, not a bot or spam script.</div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-marker-col">
-            <div class="flow-node" id="node-3">3</div>
-          </div>
-          <div class="flow-body">
-            <div class="flow-title">We scope your build</div>
-            <div class="flow-desc">A JT-Connect engineer reviews and replies within 1 business day.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="brand-bottom">
-      <span>JT-CONNECT / APPSHEET PARTNER</span>
-      <span>EST. RESPONSE &lt; 24H</span>
-    </div>
+  <div class="badge">
+    <span class="avatar">JT</span>
+    Joe Tayactac &middot; <span class="yt">AppSheet Developer</span>
   </div>
 
-  <!-- FORM PANEL -->
-  <div class="panel">
-    <div class="card">
+  <h1>I build AppSheet apps<br>that <span class="accent">actually get used.</span></h1>
+  <p class="sub">If you've seen my videos and want something built for your own business, tell me what's slowing you down — I read every message myself.</p>
 
-      <div id="formSection">
-        <div class="card-eyebrow">New inquiry</div>
-        <h2>Let's scope your automation.</h2>
-        <p class="lede">Fill this in and we'll send a verification code to confirm your email before your inquiry reaches our team.</p>
-
-        <label for="name">Name</label>
-        <input id="name" type="text" autocomplete="name" placeholder="Jordan Taylor">
-        <div class="field-error" id="err-name">Please enter your name.</div>
-
-        <label for="email">Email address</label>
-        <input id="email" type="email" autocomplete="email" placeholder="jordan@company.com">
-        <div class="field-error" id="err-email">Please enter a valid email address.</div>
-
-        <label for="details">How can we help?</label>
-        <textarea id="details" placeholder="e.g. We track inventory across 3 warehouses in a spreadsheet and need a mobile app for staff to update stock in real time."></textarea>
-        <div class="field-error" id="err-details">Please describe what you need.</div>
-
-        <p class="verify-note">
-          <svg class="verify-note-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M10 1.5 3 4.5v5c0 4.5 3 7.2 7 9 4-1.8 7-4.5 7-9v-5L10 1.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
-            <path d="M7.2 10.1 9.1 12l3.7-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Next, we'll send a short code to your email. It just confirms a real person is on the other end and keeps spam submissions out of our queue — it only takes a few seconds.
-        </p>
-
-        <button id="sendBtn" onclick="sendOTP()">
-          <span class="spinner"></span>
-          <span class="btn-label">Send verification code</span>
-        </button>
-      </div>
-
-      <div id="otpSection">
-        <div class="card-eyebrow">Step 2 of 2</div>
-        <h2>Check your inbox.</h2>
-        <p class="lede" id="otpLede">We've sent a 4-digit code to your email — just to confirm it's really you and keep bots out. It can take a minute or two to arrive, so check spam if you don't see it.</p>
-
-        <label for="otp">Verification code</label>
-        <input id="otp" class="otp-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="0000">
-        <div class="field-error" id="err-otp">Enter the 4-digit code we sent you.</div>
-
-        <button id="verifyBtn" onclick="verifyOTP()">
-          <span class="spinner"></span>
-          <span class="btn-label">Verify &amp; submit</span>
-        </button>
-
-        <div class="resend-row">
-          <span id="resendHint">Didn't get a code?</span>
-          <button class="resend-link" id="resendBtn" onclick="sendOTP(true)" disabled>Resend in <span id="cooldownSeconds">60</span>s</button>
-        </div>
-
-        <button class="secondary" type="button" onclick="backToForm()">Use a different email</button>
-      </div>
-
-      <div class="success-state" id="successState">
-        <div class="success-icon">&#10003;</div>
-        <h3>You're all set.</h3>
-        <p>Thanks — your inquiry has been received. A JT-Connect engineer will reach out within one business day.</p>
-      </div>
-
-      <div class="message" id="message"></div>
-      <div class="footer">JT-CONNECT &middot; AppSheet &amp; Business Automation Solutions</div>
+  <div class="signature" aria-hidden="true">
+    <div class="sig-grid">
+      <div class="sig-cell"></div><div class="sig-cell"></div><div class="sig-cell"></div>
+      <div class="sig-cell"></div><div class="sig-cell"></div><div class="sig-cell"></div>
     </div>
+    <span class="sig-arrow">&#8594;</span>
+    <span class="sig-label">Spreadsheet to app</span>
   </div>
 
+  <div class="steps" id="stepDots">
+    <div class="step-dot active" id="dot-1"></div>
+    <div class="step-dot" id="dot-2"></div>
+    <div class="step-dot" id="dot-3"></div>
+    <span class="step-label" id="stepLabel">Your details</span>
+  </div>
+
+  <div class="card">
+
+    <div id="formSection">
+      <label for="name">Name</label>
+      <input id="name" type="text" autocomplete="name" placeholder="Your name">
+      <div class="field-error" id="err-name">Please enter your name.</div>
+
+      <label for="email">Email address</label>
+      <input id="email" type="email" autocomplete="email" placeholder="you@email.com">
+      <div class="field-error" id="err-email">Please enter a valid email address.</div>
+
+      <label for="details">What do you need built?</label>
+      <textarea id="details" placeholder="e.g. I run a small delivery business and need an app for drivers to update order status."></textarea>
+      <div class="field-error" id="err-details">Please describe what you need.</div>
+
+      <p class="verify-note">
+        <svg class="verify-note-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M10 1.5 3 4.5v5c0 4.5 3 7.2 7 9 4-1.8 7-4.5 7-9v-5L10 1.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M7.2 10.1 9.1 12l3.7-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Next I'll send a quick code to your email — just to confirm you're real and keep spam out of my inbox. Takes a few seconds.
+      </p>
+
+      <button id="sendBtn" onclick="sendOTP()">
+        <span class="spinner"></span>
+        <span class="btn-label">Send verification code</span>
+      </button>
+    </div>
+
+    <div id="otpSection">
+      <label for="otp">Verification code</label>
+      <input id="otp" class="otp-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="0000">
+      <div class="field-error" id="err-otp">Enter the 4-digit code we sent you.</div>
+      <p class="verify-note" style="margin-top:10px;">
+        <svg class="verify-note-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M10 1.5 3 4.5v5c0 4.5 3 7.2 7 9 4-1.8 7-4.5 7-9v-5L10 1.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M7.2 10.1 9.1 12l3.7-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Sent to your inbox — can take a minute or two, check spam if it's not there yet.
+      </p>
+
+      <button id="verifyBtn" onclick="verifyOTP()">
+        <span class="spinner"></span>
+        <span class="btn-label">Verify &amp; submit</span>
+      </button>
+
+      <div class="resend-row">
+        <span>Didn't get a code?</span>
+        <button class="resend-link" id="resendBtn" onclick="sendOTP(true)" disabled>Resend in <span id="cooldownSeconds">60</span>s</button>
+      </div>
+
+      <button class="secondary" type="button" onclick="backToForm()">Use a different email</button>
+    </div>
+
+    <div class="success-state" id="successState">
+      <div class="success-icon">&#10003;</div>
+      <h3>Got it — thanks!</h3>
+      <p>Your message is in my inbox. I go through these personally, so I'll get back to you soon.</p>
+    </div>
+
+    <div class="message" id="message"></div>
+  </div>
+
+  <div class="footer">Joe Tayactac &middot; AppSheet builds &middot; <a href="#">YouTube</a></div>
 </div>
 
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBQOTQ-pi9ejWiaEZnrKwfVOm8zW6R9hyn5cydNdxJWVQTV-Ck8movTjeSXy-6osjbnQ/exec";
-const REQUEST_TIMEOUT_MS = 20000; // give up and let the user retry instead of hanging forever
+const REQUEST_TIMEOUT_MS = 20000;
 const RESEND_COOLDOWN_S = 60;
 
 let customerEmail = "";
@@ -515,47 +419,38 @@ function setMessage(text, type){
   el.textContent = text;
   el.className = "message" + (type ? " " + type : "");
 }
-
 function setFieldError(id, show){
   const input = document.getElementById(id);
   const err = document.getElementById("err-" + id);
   if(input) input.classList.toggle("error", !!show);
   if(err) err.style.display = show ? "block" : "none";
 }
-
 function setButtonLoading(btn, loading, label){
   btn.disabled = loading;
   btn.classList.toggle("loading", loading);
   if(label) btn.querySelector(".btn-label").textContent = label;
 }
-
 function isValidEmail(email){
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
-
-// fetch with a hard timeout so the UI never sits stuck indefinitely
 function fetchWithTimeout(url, options, ms){
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), ms);
-  return fetch(url, { ...options, signal: controller.signal })
-    .finally(() => clearTimeout(id));
+  return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(id));
 }
-
-function advanceFlow(step){
-  for(let i = 1; i <= 3; i++){
-    const node = document.getElementById("node-" + i);
-    const thread = document.getElementById("thread-" + i);
-    node.classList.remove("active", "done");
-    if(i < step) node.classList.add("done");
-    if(i === step) node.classList.add("active");
-    if(thread) thread.classList.toggle("active", i < step);
+function setStep(step, label){
+  for(let i=1;i<=3;i++){
+    const dot = document.getElementById("dot-"+i);
+    dot.classList.remove("active","done");
+    if(i < step) dot.classList.add("done");
+    if(i === step) dot.classList.add("active");
   }
+  document.getElementById("stepLabel").textContent = label;
 }
 
 function sendOTP(isResend){
   const sendBtn = document.getElementById("sendBtn");
   const resendBtn = document.getElementById("resendBtn");
-  const activeBtn = isResend ? resendBtn : sendBtn;
 
   let name = document.getElementById("name").value.trim();
   let email = document.getElementById("email").value.trim();
@@ -575,7 +470,7 @@ function sendOTP(isResend){
     customerEmail = email;
   }
 
-  setMessage(isResend ? "Sending a new code..." : "Sending your verification code — this can take a few seconds...", "info");
+  setMessage(isResend ? "Sending a new code..." : "Sending your verification code...", "info");
   if(!isResend) setButtonLoading(sendBtn, true, "Sending code...");
   else resendBtn.disabled = true;
 
@@ -590,22 +485,15 @@ function sendOTP(isResend){
       document.getElementById("otp").value = "";
       setFieldError("otp", false);
       setMessage(isResend ? "A new code is on its way." : "Code sent — check your inbox.", "ok");
-      advanceFlow(2);
+      setStep(2, "Verify email");
       startResendCooldown();
       document.getElementById("otp").focus();
     })
     .catch(err => {
       const timedOut = err && err.name === "AbortError";
-      setMessage(
-        timedOut
-          ? "That's taking longer than expected. Please try again."
-          : "Something went wrong sending your code. Please try again.",
-        "err"
-      );
+      setMessage(timedOut ? "That's taking longer than expected. Please try again." : "Something went wrong sending your code. Please try again.", "err");
     })
-    .finally(() => {
-      setButtonLoading(sendBtn, false, "Send verification code");
-    });
+    .finally(() => setButtonLoading(sendBtn, false, "Send verification code"));
 }
 
 function startResendCooldown(){
@@ -651,23 +539,16 @@ function verifyOTP(){
         document.getElementById("otpSection").style.display = "none";
         document.getElementById("successState").style.display = "block";
         setMessage("", "");
-        advanceFlow(4);
+        setStep(3, "Done");
       } else {
         setMessage(data || "That code didn't match. Please try again.", "err");
       }
     })
     .catch(err => {
       const timedOut = err && err.name === "AbortError";
-      setMessage(
-        timedOut
-          ? "Verification is taking longer than expected. Please try again."
-          : "Something went wrong verifying your code. Please try again.",
-        "err"
-      );
+      setMessage(timedOut ? "Verification is taking longer than expected. Please try again." : "Something went wrong verifying your code. Please try again.", "err");
     })
-    .finally(() => {
-      setButtonLoading(verifyBtn, false, "Verify & submit");
-    });
+    .finally(() => setButtonLoading(verifyBtn, false, "Verify & submit"));
 }
 
 function backToForm(){
@@ -675,7 +556,7 @@ function backToForm(){
   document.getElementById("otpSection").style.display = "none";
   document.getElementById("formSection").style.display = "block";
   setMessage("", "");
-  advanceFlow(1);
+  setStep(1, "Your details");
 }
 </script>
 </body>
